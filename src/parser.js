@@ -1,6 +1,6 @@
 import {
   SP, DIGIT, ATOM_CHAR,
-  TAG, COMMAND, verify
+  TAG, COMMAND, verify, DQUOTE
 } from './formal-syntax'
 
 let ASCII_NL = 10
@@ -597,8 +597,8 @@ class TokenParser {
             throw new Error('Unexpected start of partial at position ' + this.pos)
           }
 
-          // if the char is not ATOM compatible, throw. Allow \* as an exception
-          if (ATOM_CHAR().indexOf(chr) < 0 && chr !== ']' && !(chr === '*' && this.currentNode.equals('\\'))) {
+          // if the char is not ATOM compatible or not quoted, throw. Allow \* as an exception
+          if (ATOM_CHAR().indexOf(chr) < 0 && DQUOTE().indexOf(chr) < 0 && chr !== ']' && !(chr === '*' && this.currentNode.equals('\\'))) {
             throw new Error('Unexpected char at position ' + (this.pos + i))
           } else if (this.currentNode.equals('\\*')) {
             throw new Error('Unexpected char at position ' + (this.pos + i))

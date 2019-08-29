@@ -8,3 +8,7 @@ package-lock.json
 [._]*.sw[a-p]
 [._]s[a-v][a-z]
 [._]sw[a-p]
+
+
+.idea
+package-lock.json
